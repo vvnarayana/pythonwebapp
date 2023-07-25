@@ -1,4 +1,11 @@
 # Python to Linux Web App on Azure
+- task: SnykSecurityScan@1
+  inputs:
+    serviceConnectionEndpoint: 'Snyk Integration'
+    testType: 'app'
+    monitorWhen: 'always'
+    failOnIssues: true
+    organization: 'kashyap10694'
 # Build your Python project and deploy it to Azure as a Linux Web App.
 # Change python version to one thats appropriate for your application.
 # https://docs.microsoft.com/azure/devops/pipelines/languages/python
