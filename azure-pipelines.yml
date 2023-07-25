@@ -34,13 +34,7 @@ stages:
     pool:
       vmImage: $(vmImageName)
     steps:
-    - task: SnykSecurityScan@1
-      inputs:
-          serviceConnectionEndpoint: 'Snyk Integration'
-          testType: 'app'
-          monitorWhen: 'always'
-          failOnIssues: true
-          
+        
     - task: UsePythonVersion@0
       inputs:
         versionSpec: '$(pythonVersion)'
@@ -67,6 +61,12 @@ stages:
     - upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
       displayName: 'Upload package'
       artifact: drop
+    - task: SnykSecurityScan@1
+      inputs:
+            serviceConnectionEndpoint: 'Snyk Integration'
+            testType: 'app'
+            monitorWhen: 'always'
+            failOnIssues: true
 
 - stage: Deploy
   displayName: 'Deploy Web App'
